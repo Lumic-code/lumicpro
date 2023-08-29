@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "dbA9MxVKkaoKLEeMkILr4JEwwesR6R3A4R26BIjNgtFjvr9Y01Cbp2GqNFhKislPDfQzc3h/h0D4jMA2QCEg7w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\wisdo\\OneDrive\\Desktop\\LumicPro\\LumicPro.API\\LumicPro.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\wisdo\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\wisdo\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\wisdo\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\wisdo\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\wisdo\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\wisdo\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
