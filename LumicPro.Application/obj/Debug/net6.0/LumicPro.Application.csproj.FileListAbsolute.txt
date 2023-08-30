@@ -1,0 +1,15 @@
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\bin\Debug\net6.0\LumicPro.Application.deps.json
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\bin\Debug\net6.0\LumicPro.Application.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\bin\Debug\net6.0\LumicPro.Application.pdb
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\bin\Debug\net6.0\LumicPro.Core.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\bin\Debug\net6.0\LumicPro.Core.pdb
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\LumicPro.Application.csproj.AssemblyReference.cache
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\LumicPro.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\LumicPro.Application.AssemblyInfoInputs.cache
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\LumicPro.Application.AssemblyInfo.cs
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\LumicPro.Application.csproj.CoreCompileInputs.cache
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\LumicPro.Application.csproj.CopyComplete
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\LumicPro.Application.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\refint\LumicPro.Application.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\LumicPro.Application.pdb
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\ref\LumicPro.Application.dll

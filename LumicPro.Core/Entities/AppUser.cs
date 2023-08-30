@@ -6,7 +6,7 @@ namespace LumicPro.Core.Entities
     public class AppUser
     {
         [Key]
-        public string Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Lenght must be 3 - 50 characters")]
@@ -17,7 +17,7 @@ namespace LumicPro.Core.Entities
         public string LastName { get; set; }
        
         [Required]
-        public AttendanceStatus AttendanceStatus { get; set; }
+        public string AttendanceStatus { get; set; }
 
     }
 }

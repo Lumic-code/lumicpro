@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LumicPro.Core.Entities;
+using LumicPro.Core.Repository;
+using LumicPro.Infrastructure.Context;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +9,100 @@ using System.Threading.Tasks;
 
 namespace LumicPro.Infrastructure.Repository
 {
-    internal class UserRepository
+    public class UserRepository : IUserRepository
     {
+        private readonly LumicProContext _context;
+
+        public UserRepository(LumicProContext context)
+        {
+            _context = context;
+        }
+        public AppUser AddNew(AppUser entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            _context.Add(entity);
+           var status = _context.SaveChanges();
+            if (status > 0)
+            {
+                return entity;
+            }
+            return null;
+        }
+
+        public AppUser AddNew(AppUser[] entities)
+        {
+            if (entities.Count() > 0)
+            {
+                throw new ArgumentNullException(nameof(entities));
+            }
+            _context.AddRange(entities);
+            var status = _context.SaveChanges();
+            if (status > 0)
+            {
+                return entities[0];
+            }
+            return null;
+        }
+
+        public bool Delete(AppUser entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            _context.Remove(entity);
+            var status = _context.SaveChanges();
+            if (status > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+       
+        public bool DeleteAll(List<AppUser> entities)
+        {
+            if (entities.Count() < 1)
+            {
+                throw new ArgumentNullException(nameof(entities));
+            }
+            _context.RemoveRange(entities);
+            var status = _context.SaveChanges();
+            if (status > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public IEnumerable<AppUser> GetAll()
+        {
+           return _context.AppUsers.ToList();
+        }
+
+        public AppUser GetById(string id)
+        {
+            return _context.AppUsers.FirstOrDefault(x => x.Id == id);
+        }
+
+     
+
+        public AppUser Update(AppUser entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            _context.Update(entity);
+            var status = _context.SaveChanges();
+            if (status > 0)
+            {
+                return entity;
+            }
+            return null;
+        }
     }
 }

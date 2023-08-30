@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LumicPro.Core", "LumicPro.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LumicPro.Infrastructure", "LumicPro.Infrastructure\LumicPro.Infrastructure.csproj", "{938FB96A-E93A-4F93-B0BC-597310CA411A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LumicPro.Application", "LumicPro.Application\LumicPro.Application.csproj", "{145A2BC8-45F4-4B3D-94B4-CE3AC1DB1D2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{938FB96A-E93A-4F93-B0BC-597310CA411A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{938FB96A-E93A-4F93-B0BC-597310CA411A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{938FB96A-E93A-4F93-B0BC-597310CA411A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{145A2BC8-45F4-4B3D-94B4-CE3AC1DB1D2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{145A2BC8-45F4-4B3D-94B4-CE3AC1DB1D2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{145A2BC8-45F4-4B3D-94B4-CE3AC1DB1D2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{145A2BC8-45F4-4B3D-94B4-CE3AC1DB1D2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

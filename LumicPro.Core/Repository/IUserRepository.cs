@@ -1,12 +1,19 @@
-﻿using System;
+﻿using LumicPro.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LumicPro.Core
+namespace LumicPro.Core.Repository
 {
-    internal interface IUserRepository
+    public interface IUserRepository
     {
+        AppUser AddNew(AppUser entity);
+        AppUser GetById(string id);
+        AppUser Update(AppUser entity);
+        bool Delete(AppUser entity);
+        IEnumerable<AppUser> GetAll();
+        public bool DeleteAll(List<AppUser> entities);
     }
 }
