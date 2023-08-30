@@ -116,9 +116,15 @@ namespace LumicPro.API.Controllers
         }
 
         [HttpGet("get-all-users")]
-        public IActionResult GetAll()
+        public IActionResult GetAll(int page, int perpage)
         {
             var result = _userRepository.GetAll();
+            if (result != null && result.Count() > 0)
+            {
+                var paged = _userRepository.paginate(result.ToList(), page, perpage);
+                return Ok(paged);
+            }
+           
             return Ok(result);
         }
 

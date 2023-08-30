@@ -15,5 +15,6 @@ namespace LumicPro.Core.Repository
         bool Delete(AppUser entity);
         IEnumerable<AppUser> GetAll();
         public bool DeleteAll(List<AppUser> entities);
+        IEnumerable<AppUser> paginate(List<AppUser> list, int page, int perpage);
     }
 }

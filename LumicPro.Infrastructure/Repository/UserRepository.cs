@@ -88,7 +88,18 @@ namespace LumicPro.Infrastructure.Repository
             return _context.AppUsers.FirstOrDefault(x => x.Id == id);
         }
 
-     
+        public IEnumerable<AppUser> paginate(List<AppUser> list, int page, int perpage)
+        {
+            page = page < 1 ? 1 : page;
+            perpage = perpage < 1 ? 5 : perpage;
+
+            if (list.Count > 0)
+            {
+                var paginated = list.Skip((page - 1)  * perpage).Take(perpage);
+                return paginated;
+            }
+            return new List<AppUser>();
+        } 
 
         public AppUser Update(AppUser entity)
         {
