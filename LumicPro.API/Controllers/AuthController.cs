@@ -29,9 +29,8 @@ namespace LumicPro.API.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto model)
         {
-            try
-            {
-                 throw new Exception("This app must stop here!!!"); 
+           
+                 //throw new Exception("This app must stop here!!!"); 
 
                 if (!ModelState.IsValid)
                 {
@@ -52,12 +51,10 @@ namespace LumicPro.API.Controllers
                 return BadRequest("Invalid credential for email");
                
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
+          
+           
         }
 
         
     }
-}
+

@@ -14,7 +14,7 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
-logger.Debug("init.main");
+
 
 try
 {
@@ -58,6 +58,7 @@ try
     builder.Services.AddDbContext<LumicProContext>(options =>
                       options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
     builder.Services.AddScoped<IUserRepository, UserRepository>();
+    builder.Services.AddAutoMapper(typeof(Program));
 
     builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<LumicProContext>();
 
@@ -78,7 +79,9 @@ try
         };
     });
 
+   
 
+    //pipeline is below **********************************************************************
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.

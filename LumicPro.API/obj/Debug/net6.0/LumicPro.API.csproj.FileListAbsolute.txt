@@ -80,3 +80,5 @@ C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\NLog.dll
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\NLog.Extensions.Logging.dll
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\nlog.config
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -13,3 +13,5 @@ C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\L
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\refint\LumicPro.Application.dll
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\LumicPro.Application.pdb
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\obj\Debug\net6.0\ref\LumicPro.Application.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\bin\Debug\net6.0\LumicPro.Infrastructure.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.Application\bin\Debug\net6.0\LumicPro.Infrastructure.pdb

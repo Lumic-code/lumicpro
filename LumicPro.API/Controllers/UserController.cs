@@ -1,4 +1,5 @@
-﻿using LumicPro.Application.Models;
+﻿using AutoMapper;
+using LumicPro.Application.Models;
 using LumicPro.Core.Entities;
 using LumicPro.Core.Enums;
 using LumicPro.Core.Repository;
@@ -16,11 +17,13 @@ namespace LumicPro.API.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public UserController(IUserRepository userRepository, UserManager<AppUser> userManager)
+        public UserController(IUserRepository userRepository, UserManager<AppUser> userManager, IMapper mapper)
         {
             _userRepository = userRepository;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
@@ -45,25 +48,31 @@ namespace LumicPro.API.Controllers
                 {
                     return BadRequest("Invalid Attendance Status");
                 }
-                var appUser = new AppUser
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    AttendanceStatus = model.AttendanceStatus,
-                    UserName = model.Email
-                };
+             
 
+                var mappedUser = _mapper.Map<AppUser>(model);
                 //var result = _userRepository.AddNew(appUser);
-                var result = await _userManager.CreateAsync(appUser, model.Password);
+                var result = await _userManager.CreateAsync(mappedUser, model.Password);
                 if(result.Succeeded)
                 {
-                    return CreatedAtAction(nameof(GetUser), new { Id = appUser.Id }, appUser);
+                    //return CreatedAtAction(nameof(GetUser), new { Id = mappedUser.Id }, mappedUser);
+                     var userFromDb = _mapper.Map<UserResponse>(mappedUser);
+                    
+                    var res = new ResponseObject<UserResponse>()
+                     {
+                            StatusCode = 200,
+                            DisplayMessage = $"User with Id {userFromDb.Id} was successfully added!",
+                            Data = userFromDb,
+                     };
+
+                      return Ok(res);
                 }
 
                 foreach(var err in result.Errors)
                 {
                     ModelState.AddModelError(err.Code, err.Description);
                 }
+
                 return BadRequest();
             }
             catch (Exception ex)
@@ -88,7 +97,15 @@ namespace LumicPro.API.Controllers
                 {
                     return NotFound("No record found!");
                 }
-                return Ok(result);
+                var mappedUser = _mapper.Map<UserResponse>(result);
+                var res = new ResponseObject<UserResponse>()
+                {
+                    StatusCode = 200,
+                    DisplayMessage = $"User with Id {mappedUser.Id} was successfully found!",
+                    Data = mappedUser
+                };
+
+                return Ok(res);
             }
             catch (Exception ex)
             {
