@@ -37,7 +37,7 @@ namespace LumicPro.API.Controllers
                 var user = _userRepository.GetByEmail(model.Email);
                 if (user != null)
                 {
-                    if (model.Password == user.Password)
+                    if (model.Password == user.PasswordHash)
                     {
                         var jwt = new Utils(_configuration);
                         var token = jwt.GenerateJWT(user);

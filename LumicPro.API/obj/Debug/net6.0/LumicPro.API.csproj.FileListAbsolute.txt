@@ -71,3 +71,8 @@ C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\LumicPro.
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\LumicPro.Application.pdb
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
