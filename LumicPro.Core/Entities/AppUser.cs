@@ -15,7 +15,14 @@ namespace LumicPro.Core.Entities
         [Required]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Lenght must be 3 - 50 characters")]
         public string LastName { get; set; }
-       
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+
         [Required]
         public string AttendanceStatus { get; set; }
 

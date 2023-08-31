@@ -2,13 +2,15 @@
 using LumicPro.Core.Entities;
 using LumicPro.Core.Enums;
 using LumicPro.Core.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LumicPro.API.Controllers
 {
+     //[ApiController]
     [Route("api/[controller]")]
-    [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -18,6 +20,7 @@ namespace LumicPro.API.Controllers
             _userRepository = userRepository;
         }
 
+        [AllowAnonymous]
         [HttpPost("add")]
         public IActionResult AddNewUser([FromBody] AddUserDto model)
         {

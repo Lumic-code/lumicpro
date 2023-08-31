@@ -12,6 +12,7 @@ namespace LumicPro.Core.Repository
         AppUser AddNew(AppUser entity);
         AppUser GetById(string id);
         AppUser Update(AppUser entity);
+        AppUser GetByEmail(string email);
         bool Delete(AppUser entity);
         IEnumerable<AppUser> GetAll();
         public bool DeleteAll(List<AppUser> entities);

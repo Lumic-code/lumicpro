@@ -88,6 +88,11 @@ namespace LumicPro.Infrastructure.Repository
             return _context.AppUsers.FirstOrDefault(x => x.Id == id);
         }
 
+        public AppUser GetByEmail(string email)
+        {
+            return _context.AppUsers.FirstOrDefault(x => x.Email == email);
+        }
+
         public IEnumerable<AppUser> paginate(List<AppUser> list, int page, int perpage)
         {
             page = page < 1 ? 1 : page;

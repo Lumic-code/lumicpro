@@ -3,6 +3,7 @@ using LumicPro.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LumicPro.Infrastructure.Migrations
 {
     [DbContext(typeof(LumicProContext))]
-    partial class LumicProContextModelSnapshot : ModelSnapshot
+    [Migration("20230830180229_passwordAndEmail")]
+    partial class passwordAndEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
