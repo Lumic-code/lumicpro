@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GdUtx6aSUyy7fT6aW0Lr31DKCdFY2qUFaWdr9IctpeHi7v+BNt95Y2rppuzpf7J++92YUaE2RRxS0W4Hu7G9ZA==",
+  "dgSpecHash": "qdc/Wz3gv6sWKdTfmDW3lj7Ml5rtkWOLPEGUUmbpR0uh7F8pPyvi1t2ZBEBc1l1OzPXyZH1jW9DugLdEMxeggA==",
   "success": true,
   "projectFilePath": "C:\\Users\\wisdo\\OneDrive\\Desktop\\LumicPro\\LumicPro.API\\LumicPro.API.csproj",
   "expectedPackageFiles": [
@@ -42,6 +42,9 @@
     "C:\\Users\\wisdo\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\wisdo\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\wisdo\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\wisdo\\.nuget\\packages\\nlog\\5.2.3\\nlog.5.2.3.nupkg.sha512",
+    "C:\\Users\\wisdo\\.nuget\\packages\\nlog.extensions.logging\\5.3.3\\nlog.extensions.logging.5.3.3.nupkg.sha512",
+    "C:\\Users\\wisdo\\.nuget\\packages\\nlog.web.aspnetcore\\5.3.3\\nlog.web.aspnetcore.5.3.3.nupkg.sha512",
     "C:\\Users\\wisdo\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\wisdo\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\wisdo\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",

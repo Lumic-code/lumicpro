@@ -8,27 +8,36 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using NLog;
+using NLog.Web;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
 
-var builder = WebApplication.CreateBuilder(args);
+var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+logger.Debug("init.main");
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
+try
 {
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        In = ParameterLocation.Header,
-        Description = "Fast authentication scheme",
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey,
-        BearerFormat = "JWT",
-        Scheme = "Bearer"
-    });
+    var builder = WebApplication.CreateBuilder(args);
 
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    // Add services to the container.
+
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen(options =>
+    {
+        options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            In = ParameterLocation.Header,
+            Description = "Fast authentication scheme",
+            Name = "Authorization",
+            Type = SecuritySchemeType.ApiKey,
+            BearerFormat = "JWT",
+            Scheme = "Bearer"
+        });
+
+        options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
            new OpenApiSecurityScheme
@@ -42,47 +51,71 @@ builder.Services.AddSwaggerGen(options =>
            },new List<string>()
         }
 
-    }) ; 
-   
-}
-);
-builder.Services.AddDbContext<LumicProContext>(options => 
-                  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")) );
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+    });
 
-builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<LumicProContext>();
+    }
+    );
+    builder.Services.AddDbContext<LumicProContext>(options =>
+                      options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    var key = Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt:Key").Value);
-    options.TokenValidationParameters = new TokenValidationParameters
+    builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<LumicProContext>();
+
+    builder.Services.AddAuthentication(options =>
     {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateAudience = false,
-        ValidateIssuer = false
-    };
-});
- 
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(options =>
+    {
+        var key = Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt:Key").Value);
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateAudience = false,
+            ValidateIssuer = false
+        };
+    });
 
-var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+
+        app.UseExceptionHandler(builder =>
+        {
+            builder.Run(async context =>
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                var error = context.Features.Get<IExceptionHandlerPathFeature>();
+
+                logger.Error($"Error path: {error.Path}, Error thrown: {error.Error.Message}, " +
+                    $"Inner Message: {error.Error.InnerException}");
+            });
+        });
+    }
+
+    app.UseHttpsRedirection();
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    app.Run();
+
+}
+catch (Exception exception)
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    logger.Error(exception, "Stopped program because of exception");
+    throw;
+}
+finally
+{
+    NLog.LogManager.Shutdown();
 }
 
-app.UseHttpsRedirection();
-app.UseAuthentication(); 
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

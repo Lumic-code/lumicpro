@@ -17,11 +17,13 @@ namespace LumicPro.API.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IUserRepository _userRepository;
+        private readonly ILogger<AuthController> _logger;
 
-        public AuthController(IConfiguration configuration, IUserRepository userRepository)
+        public AuthController(IConfiguration configuration, IUserRepository userRepository, ILogger<AuthController> logger)
         {
             _configuration = configuration;
             _userRepository = userRepository;
+            _logger = logger;
         }
 
         [HttpPost("login")]
@@ -29,6 +31,8 @@ namespace LumicPro.API.Controllers
         {
             try
             {
+                 throw new Exception("This app must stop here!!!"); 
+
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
@@ -50,7 +54,7 @@ namespace LumicPro.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest();
+                throw;
             }
         }
 
