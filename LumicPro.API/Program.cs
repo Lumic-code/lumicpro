@@ -1,7 +1,9 @@
+using LumicPro.Core.Entities;
 using LumicPro.Core.Repository;
 using LumicPro.Infrastructure.Context;
 using LumicPro.Infrastructure.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -47,6 +49,8 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<LumicProContext>(options => 
                   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")) );
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<LumicProContext>();
 
 builder.Services.AddAuthentication(options =>
 {

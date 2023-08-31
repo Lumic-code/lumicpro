@@ -4,6 +4,7 @@ using LumicPro.Core.Enums;
 using LumicPro.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LumicPro.API.Controllers
@@ -14,21 +15,29 @@ namespace LumicPro.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+        private readonly UserManager<AppUser> _userManager;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, UserManager<AppUser> userManager)
         {
             _userRepository = userRepository;
+            _userManager = userManager;
         }
 
         [AllowAnonymous]
         [HttpPost("add")]
-        public IActionResult AddNewUser([FromBody] AddUserDto model)
+        public async Task<IActionResult> AddNewUser([FromBody] AddUserDto model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
+                }
+
+                var userExists = await _userManager.FindByEmailAsync(model.Email);
+                if(userExists != null)
+                {
+                    return BadRequest("Email already exists!");
                 }
 
                 AttendanceStatus status;
@@ -41,10 +50,21 @@ namespace LumicPro.API.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     AttendanceStatus = model.AttendanceStatus,
+                    UserName = model.Email
                 };
 
-                var result = _userRepository.AddNew(appUser);
-                return CreatedAtAction(nameof(GetUser), new { Id = result.Id }, result);
+                //var result = _userRepository.AddNew(appUser);
+                var result = await _userManager.CreateAsync(appUser, model.Password);
+                if(result.Succeeded)
+                {
+                    return CreatedAtAction(nameof(GetUser), new { Id = appUser.Id }, appUser);
+                }
+
+                foreach(var err in result.Errors)
+                {
+                    ModelState.AddModelError(err.Code, err.Description);
+                }
+                return BadRequest();
             }
             catch (Exception ex)
             {
