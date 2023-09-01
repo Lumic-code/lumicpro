@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace LumicPro.Application.Models
 {
-    public class ForgotPasswordDto
+    public class AddRoleDto
     {
-        public string Email { get; set; }
+        public List<string> Roles { get; set; }
+
+        public AddRoleDto()
+        {
+            Roles = new List<string>();
+        }
     }
 }

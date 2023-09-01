@@ -10,7 +10,12 @@ namespace LumicPro.Application.Models
     {
         public int StatusCode { get; set; }
         public string DisplayMessage { get; set; }
-        public string[] ErrorMessages { get; set; }
+        public List<string> ErrorMessages { get; set; }
         public T Data { get; set; }
+
+        public ResponseObject()
+        {
+            ErrorMessages = new List<string>();
+        }
     }
 }

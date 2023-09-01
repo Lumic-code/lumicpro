@@ -60,7 +60,10 @@ try
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddAutoMapper(typeof(Program));
 
-    builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<LumicProContext>();
+    builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            options.SignIn.RequireConfirmedEmail = true)
+           .AddEntityFrameworkStores<LumicProContext>()
+           .AddDefaultTokenProviders();
 
     builder.Services.AddAuthentication(options =>
     {
