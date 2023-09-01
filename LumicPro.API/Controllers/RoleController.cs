@@ -37,8 +37,12 @@ namespace LumicPro.API.Controllers
             {
                  foreach (var role in model.Roles)
                 {
-                    await _roleManager.CreateAsync(new IdentityRole(role));
+                    await _roleManager.CreateAsync(new IdentityRole(role)); 
                 }
+
+                res.StatusCode = 200;
+                res.DisplayMessage = "Roles Successfully Added!";
+                return Ok(res);
             }
             res.StatusCode = 400;
             res.DisplayMessage = "Null or empty entry!";
