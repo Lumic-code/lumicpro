@@ -1,16 +1,13 @@
 ﻿using AutoMapper;
 using LumicPro.Application.Models;
 using LumicPro.Core.Entities;
-using LumicPro.Core.Enums;
-using LumicPro.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LumicPro.API.Controllers
 {
-     //[ApiController]
+    //[ApiController]
     [Route("api/[controller]")]
     [Authorize]
     public class RoleController : ControllerBase

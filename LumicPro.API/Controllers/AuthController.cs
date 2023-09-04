@@ -52,7 +52,7 @@ namespace LumicPro.API.Controllers
             {
                 if (user.EmailConfirmed)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+                    var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
                     if (result.Succeeded)
                     {
                         var jwt = new Utils(_configuration);
@@ -142,6 +142,42 @@ namespace LumicPro.API.Controllers
             await _signInManager.SignOutAsync();
             return Ok( new ResponseObject<string>() { StatusCode = 200, DisplayMessage = "LogOut Successful!"});
         }
+
+        [HttpPost("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(string email, string token)
+        {
+            var res = new ResponseObject<string>
+            {
+                StatusCode = 400
+            };
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            };
+
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                var result = await _userManager.ConfirmEmailAsync(user, token);
+                if (result.Succeeded)
+                {
+                    res.DisplayMessage = "Email confirmation was successful";
+                    res.StatusCode = 200;
+                    return Ok(res);
+                }
+                foreach (var err in result.Errors)
+                {
+                    res.DisplayMessage = "Email confirmation failed!";
+                    res.ErrorMessages.Add(err.Description);
+                    return BadRequest(res);
+
+                }
+            }
+            res.DisplayMessage = $"User with email: {email} was not found!";
+            return NotFound();
+        }   
+
     }
 
 

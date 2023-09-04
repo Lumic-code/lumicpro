@@ -4,26 +4,28 @@ using LumicPro.Core.Entities;
 using LumicPro.Core.Enums;
 using LumicPro.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LumicPro.API.Controllers
 {
-     //[ApiController]
+
+    //[ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Roles = "regular")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(IUserRepository userRepository, UserManager<AppUser> userManager, IMapper mapper)
+        public UserController(IUserRepository userRepository, UserManager<AppUser> userManager, IMapper mapper, ILogger<UserController> logger)
         {
             _userRepository = userRepository;
             _userManager = userManager;
             _mapper = mapper;
+            _logger = logger;
         }
 
         [AllowAnonymous]
@@ -51,18 +53,21 @@ namespace LumicPro.API.Controllers
              
 
                 var mappedUser = _mapper.Map<AppUser>(model);
-                //var result = _userRepository.AddNew(appUser);
                 var result = await _userManager.CreateAsync(mappedUser, model.Password);
                 if(result.Succeeded)
                 {
+                    var token = _userManager.GenerateEmailConfirmationTokenAsync(mappedUser);
+                    _logger.LogWarning($"Token: {token}");
                     //return CreatedAtAction(nameof(GetUser), new { Id = mappedUser.Id }, mappedUser);
                      var userFromDb = _mapper.Map<UserResponse>(mappedUser);
-                    
+
+                    await _userManager.AddToRoleAsync(mappedUser, "Regular");
+
                     var res = new ResponseObject<UserResponse>()
-                     {
-                            StatusCode = 200,
-                            DisplayMessage = $"User with Id {userFromDb.Id} was successfully added!",
-                            Data = userFromDb,
+                    {
+                        StatusCode = 200,
+                        DisplayMessage = $"User with Id {userFromDb.Id} was successfully added!",
+                        Data = userFromDb,
                      };
 
                       return Ok(res);
