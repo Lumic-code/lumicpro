@@ -3,6 +3,7 @@ using LumicPro.Application.Models;
 using LumicPro.Core.Entities;
 using LumicPro.Core.Enums;
 using LumicPro.Core.Repository;
+using LumicPro.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,20 +13,23 @@ namespace LumicPro.API.Controllers
 
     //[ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "regular")]
+   // [Authorize(Policy = "AdminAndSuperAdmin")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
         private readonly ILogger<UserController> _logger;
+        private readonly IUploadService _uploadService;
 
-        public UserController(IUserRepository userRepository, UserManager<AppUser> userManager, IMapper mapper, ILogger<UserController> logger)
+        public UserController(IUserRepository userRepository, UserManager<AppUser>
+            userManager, IMapper mapper, ILogger<UserController> logger, IUploadService uploadService)
         {
             _userRepository = userRepository;
             _userManager = userManager;
             _mapper = mapper;
             _logger = logger;
+            _uploadService = uploadService;
         }
 
         [AllowAnonymous]
@@ -237,6 +241,17 @@ namespace LumicPro.API.Controllers
                  return BadRequest();
             }
 
+        }
+
+        [HttpPost("upload")]
+        public async Task <IActionResult> UploadPhoto([FromForm] IFormFile model)
+        {
+            var uploadResult = await _uploadService.UploadFileAsync(model);
+            if(uploadResult != null)
+            {
+                return Ok($"publicId: {uploadResult["PublicId"]}, url: {uploadResult["url"]}");
+            }
+            return BadRequest("Upload was not successful!");
         }
     }
 }

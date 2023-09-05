@@ -82,3 +82,5 @@ C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\NLog.Web.
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\nlog.config
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\CloudinaryDotNet.dll
+C:\Users\wisdo\OneDrive\Desktop\LumicPro\LumicPro.API\bin\Debug\net6.0\Newtonsoft.Json.dll

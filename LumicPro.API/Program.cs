@@ -12,6 +12,7 @@ using NLog;
 using NLog.Web;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
+using LumicPro.Infrastructure.Services;
 
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
@@ -81,15 +82,16 @@ try
             ValidateIssuer = false
         };
     });
+    builder.Services.AddScoped<IUploadService, UploadService>();
 
-    //builder.Services.AddAuthorization(options =>
-    //{
-    //    options.AddPolicy("RegularRole", policy => policy.RequireRole("Regular"));
-    //    options.AddPolicy("AdminOrSuperAdmin", policy => policy.RequireAssertion(context =>
-    //                          context.User.IsInRole("Admin") || context.User.IsInRole("SuperAdmin")));
-    //    options.AddPolicy("AdminAndSuperAdmin", policy => policy.RequireAssertion(context =>
-    //                      context.User.IsInRole("Admin") && context.User.IsInRole("SuperAdmin")));
-    //});
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("RegularRole", policy => policy.RequireRole("Regular"));
+        options.AddPolicy("AdminOrSuperAdmin", policy => policy.RequireAssertion(context =>
+                              context.User.IsInRole("Admin") || context.User.IsInRole("SuperAdmin")));
+        options.AddPolicy("AdminAndSuperAdmin", policy => policy.RequireAssertion(context =>
+                          context.User.IsInRole("Admin") && context.User.IsInRole("SuperAdmin")));
+    });
 
 
 
