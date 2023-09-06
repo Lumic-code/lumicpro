@@ -43,10 +43,9 @@ namespace LumicPro.Infrastructure.Services
                         
                        uploadResult = await cloudinary.UploadAsync(uploadParams);
                     }
-
                     var result = new Dictionary<string, string>();
                     result.Add("PublicId", uploadResult.PublicId);
-                    result.Add("Url", uploadResult.Uri.ToString());
+                    result.Add("Url", uploadResult.Url.ToString());
                     return result;
                 }
                 return null;

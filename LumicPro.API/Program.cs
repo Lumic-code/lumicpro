@@ -84,14 +84,14 @@ try
     });
     builder.Services.AddScoped<IUploadService, UploadService>();
 
-    builder.Services.AddAuthorization(options =>
-    {
-        options.AddPolicy("RegularRole", policy => policy.RequireRole("Regular"));
-        options.AddPolicy("AdminOrSuperAdmin", policy => policy.RequireAssertion(context =>
-                              context.User.IsInRole("Admin") || context.User.IsInRole("SuperAdmin")));
-        options.AddPolicy("AdminAndSuperAdmin", policy => policy.RequireAssertion(context =>
-                          context.User.IsInRole("Admin") && context.User.IsInRole("SuperAdmin")));
-    });
+    //builder.Services.AddAuthorization(options =>
+    //{
+    //    options.AddPolicy("RegularRole", policy => policy.RequireRole("Regular"));
+    //    options.AddPolicy("AdminOrSuperAdmin", policy => policy.RequireAssertion(context =>
+    //                          context.User.IsInRole("Admin") || context.User.IsInRole("SuperAdmin")));
+    //    options.AddPolicy("AdminAndSuperAdmin", policy => policy.RequireAssertion(context =>
+    //                      context.User.IsInRole("Admin") && context.User.IsInRole("SuperAdmin")));
+    //});
 
 
 

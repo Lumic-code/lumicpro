@@ -13,7 +13,8 @@ namespace LumicPro.API.Controllers
 
     //[ApiController]
     [Route("api/[controller]")]
-   // [Authorize(Policy = "AdminAndSuperAdmin")]
+    // [Authorize(Policy = "AdminAndSuperAdmin")]
+    [Authorize (Roles = "regular")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -65,7 +66,7 @@ namespace LumicPro.API.Controllers
                     //return CreatedAtAction(nameof(GetUser), new { Id = mappedUser.Id }, mappedUser);
                      var userFromDb = _mapper.Map<UserResponse>(mappedUser);
 
-                    await _userManager.AddToRoleAsync(mappedUser, "Regular");
+                    await _userManager.AddToRoleAsync(mappedUser, "regular");
 
                     var res = new ResponseObject<UserResponse>()
                     {
@@ -244,12 +245,12 @@ namespace LumicPro.API.Controllers
         }
 
         [HttpPost("upload")]
-        public async Task <IActionResult> UploadPhoto([FromForm] IFormFile model)
+        public async Task <IActionResult> UploadPhoto([FromForm] PhotoUploadDto model)
         {
-            var uploadResult = await _uploadService.UploadFileAsync(model);
+            var uploadResult = await _uploadService.UploadFileAsync(model.File);
             if(uploadResult != null)
             {
-                return Ok($"publicId: {uploadResult["PublicId"]}, url: {uploadResult["url"]}");
+                return Ok($"publicId {uploadResult["PublicId"]}, Url {uploadResult["Url"]}");
             }
             return BadRequest("Upload was not successful!");
         }
